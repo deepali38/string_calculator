@@ -16,6 +16,11 @@ class StringCalculator
     # Convert the array of number strings to an array of integers
     num_array = num_array.map(&:to_i)
 
+    negatives = num_array.select { |num| num < 0 }
+    if negatives.any?
+      raise "negatives not allowed: #{negatives.join(', ')}"
+    end
+
     return num_array.sum
   end
 end
