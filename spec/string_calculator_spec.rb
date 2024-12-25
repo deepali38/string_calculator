@@ -13,5 +13,9 @@ RSpec.describe StringCalculator do
     it 'returns the sum for two numbers' do
       expect(StringCalculator.add("1,2")).to eq(3)
     end
+
+    it 'handles newlines as delimiters' do
+      expect(StringCalculator.add("1\n2,3")).to eq(6)
+    end
   end
 end
