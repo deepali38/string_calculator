@@ -1,8 +1,13 @@
 class StringCalculator
   def self.add(numbers)
     return 0 if numbers.empty?
-    return numbers.to_i if numbers =~ /^\d+$/
+    
+    # Split the input string by commas or newlines into an array of number strings
+    num_array = numbers.split(/,|\n/)
 
-    numbers.split(',').map(&:to_i).sum
+    # Convert the array of number strings to an array of integers
+    num_array = num_array.map(&:to_i)
+
+    return num_array.sum
   end
 end
