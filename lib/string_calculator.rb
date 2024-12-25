@@ -3,11 +3,15 @@ class StringCalculator
     return 0 if numbers.empty?
 
     if numbers.start_with?("//")
-      delimiter, numbers = numbers[2..].split("\n", 2)
-      delimiter = delimiter.gsub(/[\[\]]/, '')  # Remove brackets if present
+      delimiters_part, numbers = numbers[2..].split("\n", 2)
 
-      # Split the numbers using the custom delimiter
-      num_array = numbers.split(delimiter)
+      if delimiters_part.start_with?('[')
+        delimiters = delimiters_part.scan(/\[([^\]]+)\]/).flatten
+      else
+        delimiters = [delimiters_part]
+      end
+      delimiters_pattern = delimiters.empty? ? /,|\n/ : Regexp.union(delimiters)
+      num_array = numbers.split(delimiters_pattern)
     else
       # Split the input string by commas or newlines into an array of number strings
       num_array = numbers.split(/,|\n/)
