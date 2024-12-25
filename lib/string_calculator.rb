@@ -21,6 +21,8 @@ class StringCalculator
       raise "negatives not allowed: #{negatives.join(', ')}"
     end
 
+    num_array = num_array.select { |num| num <= 1000 }
+
     return num_array.sum
   end
 end
